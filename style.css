@@ -1163,6 +1163,36 @@ section {
   margin-top: var(--space-1);
 }
 
+.precos-box__coupon {
+  margin-bottom: var(--space-8);
+  display: flex;
+  justify-content: center;
+}
+
+.coupon-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background-color: rgba(255, 255, 255, 0.12);
+  border: 1px dashed rgba(255, 255, 255, 0.4);
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  color: var(--white);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 200ms var(--ease-soft), background-color 200ms ease;
+}
+
+.coupon-tag:hover {
+  transform: scale(1.03);
+  background-color: rgba(255, 255, 255, 0.18);
+}
+
+.coupon-icon {
+  flex-shrink: 0;
+  stroke: var(--white);
+}
+
 .precos-box__cta-wrapper {
   margin-bottom: var(--space-12);
 }
