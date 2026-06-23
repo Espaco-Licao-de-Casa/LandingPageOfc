@@ -1228,6 +1228,20 @@ section {
   outline-offset: 2px;
 }
 
+.precos-box__access-info {
+  margin-top: var(--space-4);
+  font-size: 13.5px;
+  line-height: 1.6;
+  opacity: 0.9;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 400;
+}
+
+.precos-box__access-info span {
+  display: inline-block;
+  margin-right: 4px;
+}
+
 /* Meios de Pagamento */
 .precos-box__payment-methods {
   display: flex;
