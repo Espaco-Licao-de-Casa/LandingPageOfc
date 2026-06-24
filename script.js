@@ -231,4 +231,60 @@ document.addEventListener('DOMContentLoaded', () => {
     observer.observe(marquee);
   }
 
+  /* ==========================================================================
+     VIDEO QUALITY SWITCHER
+     ========================================================================== */
+  const video = document.getElementById('testimonial-video');
+  const qualityButtons = document.querySelectorAll('.quality-btn');
+  const videoLoader = document.getElementById('video-loader');
+  const videoToast = document.getElementById('video-toast');
+
+  if (video && qualityButtons.length > 0 && videoLoader && videoToast) {
+    qualityButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (btn.classList.contains('active')) return;
+
+        const quality = btn.getAttribute('data-quality');
+        const isPlaying = !video.paused;
+
+        // Ativa o loader
+        videoLoader.classList.add('active');
+        
+        // Pausa temporariamente o vídeo para simular o carregamento/ajuste de resolução
+        if (isPlaying) {
+          video.pause();
+        }
+
+        // Atualiza a classe ativa nos botões
+        qualityButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Simula o tempo de processamento/buffering
+        setTimeout(() => {
+          videoLoader.classList.remove('active');
+
+          if (quality === 'hd') {
+            video.classList.add('enhanced-hd');
+            videoToast.textContent = 'Qualidade melhorada para 1080p (HD + IA)! ✨';
+          } else {
+            video.classList.remove('enhanced-hd');
+            videoToast.textContent = 'Qualidade alterada para 360p (Padrão).';
+          }
+
+          // Se estava tocando, retoma a reprodução
+          if (isPlaying) {
+            video.play().catch(err => console.log('Erro ao reproduzir vídeo:', err));
+          }
+
+          // Mostra a notificação toast
+          videoToast.classList.add('active');
+          setTimeout(() => {
+            videoToast.classList.remove('active');
+          }, 3000);
+
+        }, 1200);
+      });
+    });
+  }
+
 });

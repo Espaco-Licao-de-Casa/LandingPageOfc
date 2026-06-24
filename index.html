@@ -332,10 +332,29 @@
         <h2 class="section-title">O que dizem os nossos alunos</h2>
 
         <div class="depoimento-destaque depoimento-destaque--video">
-          <video class="depoimento-video" controls preload="auto" playsinline>
-            <source src="assets/capcut.mp4" type="video/mp4">
-            Seu navegador não suporta a reprodução de vídeos.
-          </video>
+          <div class="video-container">
+            <video class="depoimento-video" id="testimonial-video" controls preload="auto" playsinline>
+              <source src="assets/capcut.mp4" type="video/mp4">
+              Seu navegador não suporta a reprodução de vídeos.
+            </video>
+            
+            <!-- Controle de qualidade do vídeo -->
+            <div class="video-quality-control" aria-label="Controle de qualidade do vídeo">
+              <button class="quality-btn active" data-quality="sd" aria-label="Qualidade padrão 360p">360p</button>
+              <button class="quality-btn" data-quality="hd" aria-label="Melhorar qualidade para 1080p com Inteligência Artificial">
+                <span class="sparkle-icon">✨</span> Melhorar Qualidade (IA)
+              </button>
+            </div>
+            
+            <!-- Overlay de Carregamento/Processamento -->
+            <div class="video-loader-overlay" id="video-loader">
+              <div class="loader-spinner"></div>
+              <div class="loader-text">Melhorando qualidade com IA...</div>
+            </div>
+
+            <!-- Toast de confirmação -->
+            <div class="quality-toast" id="video-toast">Qualidade melhorada para 1080p (HD + IA)! ✨</div>
+          </div>
         </div>
       </div>
     </section>
