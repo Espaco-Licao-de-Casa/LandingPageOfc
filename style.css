@@ -1059,6 +1059,24 @@ section {
   border: 1.5px solid var(--teal-100);
 }
 
+.depoimento-destaque--video {
+  padding: 0;
+  overflow: hidden;
+  background-color: var(--teal-900);
+  border: 2px solid var(--teal-500);
+  box-shadow: 0 20px 40px rgba(3, 53, 58, 0.15);
+}
+
+.depoimento-video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border-radius: calc(var(--radius-lg) - 2px);
+  outline: none;
+  object-fit: contain;
+}
+
 .depoimento-destaque__avatar {
   width: 64px;
   height: 64px;
