@@ -232,51 +232,215 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ==========================================================================
-     VIDEO QUALITY SWITCHER
+     CUSTOM VIDEO PLAYER CONTROLS & QUALITY SWITCHER
      ========================================================================== */
   const video = document.getElementById('testimonial-video');
-  const qualityButtons = document.querySelectorAll('.quality-btn');
+  const player = document.getElementById('video-player-container');
+  const playPauseBtn = document.getElementById('play-pause-btn');
+  const playCenterBtn = document.getElementById('play-center-btn');
+  const iconPlay = document.querySelector('.icon-play');
+  const iconPause = document.querySelector('.icon-pause');
+  const progressContainer = document.getElementById('progress-container');
+  const progressJuice = document.getElementById('progress-juice');
+  const progressScrubber = document.getElementById('progress-scrubber');
+  const muteBtn = document.getElementById('mute-btn');
+  const iconVolumeUp = document.querySelector('.icon-volume-up');
+  const iconVolumeMute = document.querySelector('.icon-volume-mute');
+  const volumeSlider = document.getElementById('volume-slider');
+  const timeDisplay = document.getElementById('time-display');
+  const settingsBtn = document.getElementById('settings-btn');
+  const fullscreenBtn = document.getElementById('fullscreen-btn');
+  
+  const settingsMenu = document.getElementById('settings-menu');
+  const menuQualityTrigger = document.getElementById('menu-item-quality-trigger');
+  const currentQualityLabel = document.getElementById('current-quality-label');
+  
+  const qualityMenu = document.getElementById('quality-menu');
+  const qualityMenuBack = document.getElementById('quality-menu-back');
+  const qualityOptions = document.querySelectorAll('.quality-option-item');
+  
   const videoLoader = document.getElementById('video-loader');
   const videoToast = document.getElementById('video-toast');
 
-  if (video && qualityButtons.length > 0 && videoLoader && videoToast) {
-    qualityButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        if (btn.classList.contains('active')) return;
+  if (video && player) {
+    // Tocar/Pausar
+    const togglePlay = () => {
+      if (video.paused) {
+        video.play().catch(err => console.log(err));
+        player.classList.add('playing');
+        iconPlay.style.display = 'none';
+        iconPause.style.display = 'block';
+      } else {
+        video.pause();
+        player.classList.remove('playing');
+        iconPlay.style.display = 'block';
+        iconPause.style.display = 'none';
+      }
+      closeMenus();
+    };
 
-        const quality = btn.getAttribute('data-quality');
+    video.addEventListener('click', togglePlay);
+    playPauseBtn.addEventListener('click', togglePlay);
+    playCenterBtn.addEventListener('click', togglePlay);
+
+    video.addEventListener('play', () => {
+      player.classList.add('playing');
+      iconPlay.style.display = 'none';
+      iconPause.style.display = 'block';
+    });
+    video.addEventListener('pause', () => {
+      player.classList.remove('playing');
+      iconPlay.style.display = 'block';
+      iconPause.style.display = 'none';
+    });
+
+    // Barra de progresso e Tempo
+    const formatTime = (secs) => {
+      const m = Math.floor(secs / 60);
+      const s = Math.floor(secs % 60);
+      return `${m}:${s < 10 ? '0' : ''}${s}`;
+    };
+
+    video.addEventListener('timeupdate', () => {
+      const percentage = (video.currentTime / video.duration) * 100;
+      progressJuice.style.width = `${percentage}%`;
+      progressScrubber.style.left = `${percentage}%`;
+      timeDisplay.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration || 0)}`;
+    });
+
+    // Scrubbing
+    progressContainer.addEventListener('click', (e) => {
+      const rect = progressContainer.getBoundingClientRect();
+      const pos = (e.clientX - rect.left) / rect.width;
+      video.currentTime = pos * video.duration;
+    });
+
+    // Controle de volume
+    const updateVolume = () => {
+      video.volume = volumeSlider.value;
+      video.muted = (video.volume === 0);
+      if (video.muted) {
+        iconVolumeUp.style.display = 'none';
+        iconVolumeMute.style.display = 'block';
+      } else {
+        iconVolumeUp.style.display = 'block';
+        iconVolumeMute.style.display = 'none';
+      }
+    };
+
+    volumeSlider.addEventListener('input', updateVolume);
+
+    muteBtn.addEventListener('click', () => {
+      video.muted = !video.muted;
+      if (video.muted) {
+        iconVolumeUp.style.display = 'none';
+        iconVolumeMute.style.display = 'block';
+      } else {
+        iconVolumeUp.style.display = 'block';
+        iconVolumeMute.style.display = 'none';
+      }
+    });
+
+    // Fullscreen
+    fullscreenBtn.addEventListener('click', () => {
+      if (!document.fullscreenElement) {
+        player.requestFullscreen().catch(err => console.log(err));
+      } else {
+        document.exitFullscreen();
+      }
+    });
+
+    // Menus
+    const closeMenus = () => {
+      settingsMenu.classList.remove('open');
+      qualityMenu.classList.remove('open');
+    };
+
+    settingsBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (settingsMenu.classList.contains('open') || qualityMenu.classList.contains('open')) {
+        closeMenus();
+      } else {
+        settingsMenu.classList.add('open');
+      }
+    });
+
+    menuQualityTrigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      settingsMenu.classList.remove('open');
+      qualityMenu.classList.add('open');
+    });
+
+    qualityMenuBack.addEventListener('click', (e) => {
+      e.stopPropagation();
+      qualityMenu.classList.remove('open');
+      settingsMenu.classList.add('open');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!player.contains(e.target)) {
+        closeMenus();
+      }
+    });
+
+    // Controle de Qualidades
+    qualityOptions.forEach(opt => {
+      opt.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (opt.classList.contains('active')) return;
+
+        const res = opt.getAttribute('data-res');
         const isPlaying = !video.paused;
 
-        // Ativa o loader
+        closeMenus();
+
         videoLoader.classList.add('active');
-        
-        // Pausa temporariamente o vídeo para simular o carregamento/ajuste de resolução
+
         if (isPlaying) {
           video.pause();
         }
 
-        // Atualiza a classe ativa nos botões
-        qualityButtons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        // Simula o tempo de processamento/buffering
+        // Reset class
+        video.className = 'depoimento-video';
+        
         setTimeout(() => {
           videoLoader.classList.remove('active');
 
-          if (quality === 'hd') {
-            video.classList.add('enhanced-hd');
-            videoToast.textContent = 'Qualidade melhorada para 1080p (HD + IA)! ✨';
+          qualityOptions.forEach(o => {
+            o.classList.remove('active');
+            o.querySelector('.checkmark-space').textContent = '';
+          });
+
+          opt.classList.add('active');
+          opt.querySelector('.checkmark-space').textContent = '✓';
+
+          let toastMsg = '';
+          if (res === '1080p') {
+            video.classList.add('quality-1080p');
+            currentQualityLabel.textContent = '1080p60';
+            toastMsg = 'Qualidade melhorada para 1080p (HD + IA)! ✨';
+          } else if (res === '720p') {
+            video.classList.add('quality-720p');
+            currentQualityLabel.textContent = '720p60';
+            toastMsg = 'Qualidade alterada para 720p.';
+          } else if (res === '360p') {
+            video.classList.add('quality-360p');
+            currentQualityLabel.textContent = '360p';
+            toastMsg = 'Qualidade alterada para 360p (Padrão).';
+          } else if (res === '144p') {
+            video.classList.add('quality-144p');
+            currentQualityLabel.textContent = '144p';
+            toastMsg = 'Qualidade alterada para 144p.';
           } else {
-            video.classList.remove('enhanced-hd');
-            videoToast.textContent = 'Qualidade alterada para 360p (Padrão).';
+            currentQualityLabel.textContent = 'Automático';
+            toastMsg = 'Qualidade configurada para Automático.';
           }
 
-          // Se estava tocando, retoma a reprodução
           if (isPlaying) {
-            video.play().catch(err => console.log('Erro ao reproduzir vídeo:', err));
+            video.play().catch(err => console.log(err));
           }
 
-          // Mostra a notificação toast
+          videoToast.textContent = toastMsg;
           videoToast.classList.add('active');
           setTimeout(() => {
             videoToast.classList.remove('active');
@@ -284,6 +448,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
         }, 1200);
       });
+    });
+
+    let controlsTimeout;
+    const controlsBar = document.getElementById('video-controls');
+    
+    const showControls = () => {
+      controlsBar.classList.add('visible');
+      player.style.cursor = 'default';
+      clearTimeout(controlsTimeout);
+      if (!video.paused) {
+        controlsTimeout = setTimeout(() => {
+          if (!settingsMenu.classList.contains('open') && !qualityMenu.classList.contains('open')) {
+            controlsBar.classList.remove('visible');
+            player.style.cursor = 'none';
+          }
+        }, 3000);
+      }
+    };
+
+    player.addEventListener('mousemove', showControls);
+    player.addEventListener('mouseenter', showControls);
+    player.addEventListener('mouseleave', () => {
+      if (!video.paused && !settingsMenu.classList.contains('open') && !qualityMenu.classList.contains('open')) {
+        controlsBar.classList.remove('visible');
+      }
+    });
+
+    video.addEventListener('loadedmetadata', () => {
+      timeDisplay.textContent = `0:00 / ${formatTime(video.duration)}`;
     });
   }
 

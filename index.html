@@ -332,19 +332,16 @@
         <h2 class="section-title">O que dizem os nossos alunos</h2>
 
         <div class="depoimento-destaque depoimento-destaque--video">
-          <div class="video-container">
-            <video class="depoimento-video" id="testimonial-video" controls preload="auto" playsinline>
+          <div class="custom-video-player" id="video-player-container">
+            <video class="depoimento-video" id="testimonial-video" preload="auto" playsinline>
               <source src="assets/capcut.mp4" type="video/mp4">
               Seu navegador não suporta a reprodução de vídeos.
             </video>
-            
-            <!-- Controle de qualidade do vídeo -->
-            <div class="video-quality-control" aria-label="Controle de qualidade do vídeo">
-              <button class="quality-btn active" data-quality="sd" aria-label="Qualidade padrão 360p">360p</button>
-              <button class="quality-btn" data-quality="hd" aria-label="Melhorar qualidade para 1080p com Inteligência Artificial">
-                <span class="sparkle-icon">✨</span> Melhorar Qualidade (IA)
-              </button>
-            </div>
+
+            <!-- Play Center Button -->
+            <button class="play-center-btn" id="play-center-btn" aria-label="Reproduzir vídeo">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+            </button>
             
             <!-- Overlay de Carregamento/Processamento -->
             <div class="video-loader-overlay" id="video-loader">
@@ -354,6 +351,86 @@
 
             <!-- Toast de confirmação -->
             <div class="quality-toast" id="video-toast">Qualidade melhorada para 1080p (HD + IA)! ✨</div>
+
+            <!-- Custom Controls Bar -->
+            <div class="video-controls" id="video-controls">
+              <!-- Control Buttons Row -->
+              <div class="controls-row">
+                <div class="controls-left">
+                  <button class="control-btn" id="play-pause-btn" aria-label="Reproduzir/Pausar">
+                    <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+                    <svg class="icon-pause" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" fill="currentColor"/></svg>
+                  </button>
+                  
+                  <div class="volume-container">
+                    <button class="control-btn" id="mute-btn" aria-label="Mudo">
+                      <svg class="icon-volume-up" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" fill="currentColor"/></svg>
+                      <svg class="icon-volume-mute" viewBox="0 0 24 24" style="display:none;"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.21.05-.42.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z" fill="currentColor"/></svg>
+                    </button>
+                    <input type="range" class="volume-slider" id="volume-slider" min="0" max="1" step="0.05" value="1" aria-label="Ajustar Volume">
+                  </div>
+
+                  <span class="time-display" id="time-display">0:00 / 0:00</span>
+                </div>
+
+                <div class="controls-right">
+                  <button class="control-btn" id="fullscreen-btn" aria-label="Tela Cheia">
+                    <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z" fill="currentColor"/></svg>
+                  </button>
+                  <button class="control-btn settings-circle-btn" id="settings-btn" aria-label="Configurações">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" fill="currentColor"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Progress Bar -->
+              <div class="progress-container" id="progress-container">
+                <div class="progress-bar">
+                  <div class="progress-juice" id="progress-juice"></div>
+                  <div class="progress-scrubber" id="progress-scrubber"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Settings Menu Principal -->
+            <div class="settings-menu" id="settings-menu">
+              <div class="menu-item" id="menu-item-quality-trigger">
+                <span>Qualidade</span>
+                <span class="current-quality-label" id="current-quality-label">Automático</span>
+              </div>
+            </div>
+
+            <!-- Menu de Resoluções de Qualidade -->
+            <div class="quality-menu" id="quality-menu">
+              <div class="quality-menu-header" id="quality-menu-back">
+                <svg class="back-icon" viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" fill="currentColor"/></svg>
+                <span>Qualidade</span>
+              </div>
+              <div class="quality-menu-list">
+                <div class="quality-option-item" data-res="1080p">
+                  <span class="checkmark-space"></span>
+                  <span>1080p60 <sup class="sup-hd">HD</sup></span>
+                </div>
+                <div class="quality-option-item" data-res="720p">
+                  <span class="checkmark-space"></span>
+                  <span>720p60</span>
+                </div>
+                <div class="quality-option-item" data-res="360p">
+                  <span class="checkmark-space"></span>
+                  <span>360p</span>
+                </div>
+                <div class="quality-option-item" data-res="144p">
+                  <span class="checkmark-space"></span>
+                  <span>144p</span>
+                </div>
+                <div class="quality-option-item active" data-res="auto">
+                  <span class="checkmark-space">✓</span>
+                  <span>Automático</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
