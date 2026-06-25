@@ -1647,6 +1647,48 @@ section {
   margin-top: var(--space-1);
 }
 
+/* WhatsApp Free Group Link */
+.precos-box__free-group {
+  margin-bottom: var(--space-8);
+  display: flex;
+  justify-content: center;
+}
+
+.free-group-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  padding: 10px 22px;
+  border-radius: var(--radius-pill);
+  font-size: 14px;
+  color: var(--white);
+  text-decoration: none;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 200ms var(--ease-soft), background-color 200ms ease, border-color 200ms ease, color 200ms ease, box-shadow 200ms ease;
+}
+
+.free-group-tag:hover {
+  transform: translateY(-2px);
+  background-color: var(--white);
+  color: var(--orange-700);
+  border-color: var(--white);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.free-group-tag:hover .free-group-icon {
+  stroke: var(--orange-700);
+}
+
+.free-group-icon {
+  flex-shrink: 0;
+  stroke: var(--white);
+  fill: none;
+  transition: stroke 200ms ease;
+}
+
 .precos-box__coupon {
   margin-bottom: var(--space-8);
   display: flex;
