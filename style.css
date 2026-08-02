@@ -100,12 +100,16 @@ fieldset {
   border: none;
 }
 
-/* Container */
+/* Container & Utilities */
 .container {
   max-width: var(--container-max);
   margin: 0 auto;
   padding-left: var(--space-6);
   padding-right: var(--space-6);
+}
+
+.text-center {
+  text-align: center;
 }
 
 /* Common Section Layout */
@@ -701,6 +705,12 @@ section {
   font: 500 24px var(--font-display);
   margin-bottom: var(--space-6);
   letter-spacing: -0.01em;
+}
+
+.premios__subtitle {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Logo Marquee */
