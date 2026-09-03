@@ -17,7 +17,7 @@
   <meta property="og:title" content="Preparatório Vestibulinho ETEC e Instituto Federal — Espaço Lição de Casa">
   <meta property="og:description"
     content="Garanta sua vaga na ETEC e no Instituto Federal estudando online com simulados focados e acompanhamento individual. Matricule-se por R$ 780,00 ou em até 6x de R$ 129,90.">
-  <meta property="og:image" content="assets/hero_collage_1.png">
+  <meta property="og:image" content="<?php echo get_template_directory_uri(); ?>/assets/hero_collage_1.png">
   <meta property="og:type" content="website">
 
   <!-- Google Fonts -->
@@ -28,7 +28,7 @@
     rel="stylesheet">
 
   <!-- Custom Stylesheets -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/style.css">
 </head>
 
 <body>
@@ -37,7 +37,7 @@
   <header class="header" id="navbar">
     <div class="header__container">
       <a href="#" class="header__logo" aria-label="Ir para o topo">
-        <img src="assets/logo.png" alt="Preparatório ETEC e Instituto Federal" class="header__logo-img">
+        <img src="<?php echo get_template_directory_uri(); ?>/assets/logo.png" alt="Preparatório ETEC e Instituto Federal" class="header__logo-img">
         <span class="header__logo-text">Preparatório ETEC & IF</span>
       </a>
 
@@ -88,11 +88,11 @@
         <div class="hero__media">
           <div class="hero__collage">
             <div class="hero__img-wrapper hero__img-wrapper--primary">
-              <img src="assets/estudantes_grupo.jpg" alt="Três estudantes da ETEC mostrando orgulhosamente as inscrições nos braços"
+              <img src="<?php echo get_template_directory_uri(); ?>/assets/estudantes_grupo.jpg" alt="Três estudantes da ETEC mostrando orgulhosamente as inscrições nos braços"
                 class="hero__img">
             </div>
             <div class="hero__img-wrapper hero__img-wrapper--secondary">
-              <img src="assets/estudante_individual.jpg" alt="Estudante da ETEC sorrindo e mostrando a inscrição RH em seu braço"
+              <img src="<?php echo get_template_directory_uri(); ?>/assets/estudante_individual.jpg" alt="Estudante da ETEC sorrindo e mostrando a inscrição RH em seu braço"
                 class="hero__img">
             </div>
           </div>
@@ -191,7 +191,7 @@
           <!-- Card 1 -->
           <article class="card card--stage">
             <div class="card__img-container">
-              <img src="assets/stages_infantil.png" alt="Adolescente estudando online de forma focada"
+              <img src="<?php echo get_template_directory_uri(); ?>/assets/stages_infantil.png" alt="Adolescente estudando online de forma focada"
                 class="card__stage-img">
               <span class="badge badge--accent card__stage-badge">Fase 1</span>
             </div>
@@ -206,7 +206,7 @@
           <!-- Card 2 -->
           <article class="card card--stage">
             <div class="card__img-container">
-              <img src="assets/stages_fundamental.png" alt="Grupo de adolescentes estudando de forma colaborativa"
+              <img src="<?php echo get_template_directory_uri(); ?>/assets/stages_fundamental.png" alt="Grupo de adolescentes estudando de forma colaborativa"
                 class="card__stage-img">
               <span class="badge badge--accent card__stage-badge">Fase 2</span>
             </div>
@@ -246,41 +246,41 @@
           <div class="logo-marquee__track">
             <!-- 2026 Students -->
             <div class="logo-marquee__item logo-marquee__item--img">
-              <img src="assets/aprovado_2026_lorena.jpg" alt="Lorena - Aprovada ETEC 2026" class="approved-card-img">
+              <img src="<?php echo get_template_directory_uri(); ?>/assets/aprovado_2026_lorena.jpg" alt="Lorena - Aprovada ETEC 2026" class="approved-card-img">
             </div>
             <div class="logo-marquee__item logo-marquee__item--img">
-              <img src="assets/aprovado_2026_geovani.jpg" alt="Geovani Oliveira - Aprovado ETEC 2026"
+              <img src="<?php echo get_template_directory_uri(); ?>/assets/aprovado_2026_geovani.jpg" alt="Geovani Oliveira - Aprovado ETEC 2026"
                 class="approved-card-img">
             </div>
             <div class="logo-marquee__item logo-marquee__item--img">
-              <img src="assets/aprovado_2026_enzo.jpg" alt="Enzo Takamune - Aprovado ETEC 2026"
+              <img src="<?php echo get_template_directory_uri(); ?>/assets/aprovado_2026_enzo.jpg" alt="Enzo Takamune - Aprovado ETEC 2026"
                 class="approved-card-img">
             </div>
             <!-- 2025 Students -->
             <div class="logo-marquee__item logo-marquee__item--img">
-              <img src="assets/aprovado_2025_milena.jpg" alt="Milena - Aprovada ETEC 2025" class="approved-card-img">
+              <img src="<?php echo get_template_directory_uri(); ?>/assets/aprovado_2025_milena.jpg" alt="Milena - Aprovada ETEC 2025" class="approved-card-img">
             </div>
             <div class="logo-marquee__item logo-marquee__item--img">
-              <img src="assets/aprovado_2025_maria.png" alt="Maria Valentina - Aprovada ETEC 2025"
+              <img src="<?php echo get_template_directory_uri(); ?>/assets/aprovado_2025_maria.png" alt="Maria Valentina - Aprovada ETEC 2025"
                 class="approved-card-img">
             </div>
             <!-- Duplicados para loop perfeito -->
             <div class="logo-marquee__item logo-marquee__item--img">
-              <img src="assets/aprovado_2026_lorena.jpg" alt="Lorena - Aprovada ETEC 2026" class="approved-card-img">
+              <img src="<?php echo get_template_directory_uri(); ?>/assets/aprovado_2026_lorena.jpg" alt="Lorena - Aprovada ETEC 2026" class="approved-card-img">
             </div>
             <div class="logo-marquee__item logo-marquee__item--img">
-              <img src="assets/aprovado_2026_geovani.jpg" alt="Geovani Oliveira - Aprovado ETEC 2026"
+              <img src="<?php echo get_template_directory_uri(); ?>/assets/aprovado_2026_geovani.jpg" alt="Geovani Oliveira - Aprovado ETEC 2026"
                 class="approved-card-img">
             </div>
             <div class="logo-marquee__item logo-marquee__item--img">
-              <img src="assets/aprovado_2026_enzo.jpg" alt="Enzo Takamune - Aprovado ETEC 2026"
+              <img src="<?php echo get_template_directory_uri(); ?>/assets/aprovado_2026_enzo.jpg" alt="Enzo Takamune - Aprovado ETEC 2026"
                 class="approved-card-img">
             </div>
             <div class="logo-marquee__item logo-marquee__item--img">
-              <img src="assets/aprovado_2025_milena.jpg" alt="Milena - Aprovada ETEC 2025" class="approved-card-img">
+              <img src="<?php echo get_template_directory_uri(); ?>/assets/aprovado_2025_milena.jpg" alt="Milena - Aprovada ETEC 2025" class="approved-card-img">
             </div>
             <div class="logo-marquee__item logo-marquee__item--img">
-              <img src="assets/aprovado_2025_maria.png" alt="Maria Valentina - Aprovada ETEC 2025"
+              <img src="<?php echo get_template_directory_uri(); ?>/assets/aprovado_2025_maria.png" alt="Maria Valentina - Aprovada ETEC 2025"
                 class="approved-card-img">
             </div>
           </div>
@@ -334,7 +334,7 @@
         <div class="depoimento-destaque depoimento-destaque--video">
           <div class="custom-video-player" id="video-player-container">
             <video class="depoimento-video" id="testimonial-video" preload="auto" playsinline>
-              <source src="assets/capcut.mp4" type="video/mp4">
+              <source src="<?php echo get_template_directory_uri(); ?>/assets/capcut.mp4" type="video/mp4">
               Seu navegador não suporta a reprodução de vídeos.
             </video>
 
@@ -441,7 +441,7 @@
       <div class="diretor__container container">
         <div class="diretor__wrapper">
           <div class="diretor__media">
-            <img src="assets/ilce.jpg" alt="Professora Ilce - Idealizadora" class="diretor__img">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/ilce.jpg" alt="Professora Ilce - Idealizadora" class="diretor__img">
           </div>
           <div class="diretor__content">
             <span class="section-eyebrow" style="color: var(--teal-200);">Palavra da Direção</span>
@@ -481,7 +481,7 @@
           <!-- Polo Sorocaba -->
           <div class="card card--unidade card--unidade-com-foto">
             <div class="card__img-container">
-              <img src="assets/fachada.jpg" alt="Fachada do prédio do Espaço Lição de Casa" class="card__unidade-img">
+              <img src="<?php echo get_template_directory_uri(); ?>/assets/fachada.jpg" alt="Fachada do prédio do Espaço Lição de Casa" class="card__unidade-img">
             </div>
             <div class="card__unidade-body">
               <div class="card__unidade-header">
@@ -611,7 +611,7 @@
         <!-- Coluna Logo/Desc -->
         <div class="footer__col footer__col--brand">
           <a href="#" class="footer__logo">
-            <img src="assets/logo.png" alt="Preparatório ETEC e Instituto Federal" class="footer__logo-img">
+            <img src="<?php echo get_template_directory_uri(); ?>/assets/logo.png" alt="Preparatório ETEC e Instituto Federal" class="footer__logo-img">
             <span>Preparatório ETEC & IF</span>
           </a>
           <p class="footer__desc">O preparatório ETEC e Instituto Federal do Espaço Lição de Casa oferece material focado, simulados de alto
@@ -692,7 +692,7 @@
   </footer>
 
   <!-- Custom Scripts -->
-  <script src="script.js"></script>
+  <script src="<?php echo get_template_directory_uri(); ?>/script.js"></script>
 </body>
 
 </html>
